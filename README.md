@@ -258,9 +258,22 @@ Cloudflare 版做了两件事：
 `http://localhost:4321/admin` —— 站点信息、说说、留言、订阅源的管理界面。
 
 - 写操作落到 `var/store.json`（**不在 `src/` 内**，避免触发内容集合重建）。
-- 设置环境变量 `SHANYING_ADMIN_TOKEN` 后，所有写操作需携带 token；
-  未设置时视为本地开发模式，直接放行。
+- **管理口令**：环境变量 `SHANYING_ADMIN_TOKEN`（Cloudflare 上是 Worker secret）。
+  - 本地：写进项目根目录的 `.env`（已被 `.gitignore` 忽略）；
+  - 线上：`npx wrangler secret put SHANYING_ADMIN_TOKEN`。
+- 没配置口令时**管理接口整体关闭**（fail closed），不会像以前那样「开发模式全开」。
+- 口令有两种用法：直接带 `token` 参数调用 `/api/admin`；或在管理页输入一次，
+  换一个 **HttpOnly + SameSite=Lax 的签名会话 Cookie**（7 天有效）。
 - 站点信息类改动写在静态页面里，需要**重新构建**才会在前台生效（页面内已提示）。
+
+### 前台发布说说
+
+说说页底部工具栏的**铅笔图标就是发布按钮**（原主题在这里放的是「登录后发布说说」的人形图标）：
+
+- 点它 → 直接打开页内编辑器（正文 / 关键词 / 地点），发布后立刻出现在说说列表里；
+- 权限跟着管理会话走：`/admin` 登录过 → 可发布可编辑；没登录 → 提示去 `/admin` 登录；
+- 服务端也做了同样的校验：`feng_talk_write` 没有有效会话直接 403，光靠改前端绕不过去；
+- 写操作带 `nonce`（会话派生），会话过期会被挡下并提示刷新。
 
 ### 桌面宠物
 
@@ -321,6 +334,7 @@ Cloudflare 版做了两件事：
 | 社交账号默认值 | 原主题默认填的是作者西风自己的账号（gentpan），本站已全部改成本站作者；`social_x` 因无账号置空 |
 | Cloudflare Pages | Astro 7 的 `@astrojs/cloudflare` 已移除 Pages 支持，只能部署到 **Cloudflare Workers**（静态资源走 assets binding）。原 Pages 项目需要迁移，见「部署到 Cloudflare」 |
 | Cloudflare 上的运行期数据 | Workers 无文件系统，改用 KV namespace `SHANYING_STORE`；KV 每秒单 key 只能写一次，所以写入做了节流与合并 |
+| 管理接口与前台发布 | 管理口令 `SHANYING_ADMIN_TOKEN` 未配置时 `/api/admin` **整体关闭**（不再有「开发模式全开」）；登录后换成签名会话 Cookie，前台说说页据此显示发布按钮并允许发布说说 |
 | 友链页的配对游戏 | 原主题的「博友配对 / 头像消消乐」游戏区（玩家条、类型标签、头像墙、棋盘、排行榜入口）已按本站需求移除，友链页只保留友链列表与「站点资料 / 申请友链」入口。前端 JS 一行未改（缺节点时各模块自行静默退出），接口 `feng_friend_game` 也原样保留；通用主题包 `主题文件/` 里仍是完整实现 |
 
 ---
