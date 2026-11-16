@@ -128,9 +128,9 @@ npx wrangler deploy    # 部署到 Workers
 npx wrangler login
 ```
 
-KV namespace **不用手动建**：`wrangler.jsonc` 里只写绑定名、不写 `id`，
-wrangler 会在部署时自动开通（`SHANYING_STORE` 是本站的，
-`SESSION` 是 Astro session 用的，适配器自动加）。
+KV namespace **不用手动建**：第一次部署时 `wrangler.jsonc` 里只写绑定名、不写 `id`，
+wrangler 会自动开通好并把 id 回填到配置里（KV id 不是密钥，可以直接入库）。
+`SHANYING_STORE` 是本站的运行期数据，`SESSION` 是 Astro session 用的（适配器强制要求）。
 
 `wrangler.jsonc` 里的关键项：
 
@@ -140,12 +140,38 @@ wrangler 会在部署时自动开通（`SHANYING_STORE` 是本站的，
 | `kv_namespaces[SHANYING_STORE]` | 运行期数据（留言 / 说说 / 宠物进度 / 浏览量）的存储 |
 | `compatibility_flags` | `nodejs_compat` |
 
-部署完成后，在 Cloudflare 控制台的 **Workers → Settings → Domains & Routes** 里
-把 `ficor.cn` 绑定到这个 Worker 即可。
+### 本站当前的线上形态
 
-**Git 自动部署**：仓库里的 `.github/workflows/deploy.yml` 会在 push 到 `main` 时
-自动构建并部署，前提是在仓库 Settings → Secrets 里配好
-`CLOUDFLARE_API_TOKEN`（Workers 部署权限）与 `CLOUDFLARE_ACCOUNT_ID`。
+| 项 | 值 |
+| :-- | :-- |
+| Worker 名 | `ficor-shanying` |
+| 线上地址 | `https://ficor-shanying.ficor.workers.dev` |
+| 正式域名 | `https://ficor.cn`（Zone `ficor.cn`，Worker route `ficor.cn/*`） |
+| 账号 | Ficor（Account ID `f869cc66cc3e3180823145c967c5481f`） |
+| 运行期数据 | KV namespace `ficor-shanying-shanying-store`（id `0a8c4a9bcd4d43baac19442b2827e914`） |
+| Astro session | KV namespace `ficor-shanying-session`（id `ead6cce60d9842be8a949a5d12a3dbce`） |
+
+域名绑定用的是 **Worker route**（`POST /zones/{zone}/workers/routes`，pattern `ficor.cn/*`），
+配合一条已代理的 CNAME：`ficor.cn` → `ficor-shanying.ficor.workers.dev`。
+
+> 为什么不是 Workers 自定义域名（custom domain）？
+> 自定义域名要求该主机名下没有其它 DNS 记录，而 zone 里原本有一条指向已下线的
+> Pages 项目的 CNAME；把它的目标改成 Worker 地址、交给 route 接管，
+> 就不用动 DNS 也能继续服务，且不会出现解析空窗。
+> （旧 Pages 项目 `ficor-shanying` 及其 GitHub 自动部署已下线。）
+
+### Git 自动部署
+
+仓库里的 `.github/workflows/deploy.yml` 会在 push 到 `main` 时自动构建并部署：
+
+- `CLOUDFLARE_ACCOUNT_ID` 已作为仓库 **variable** 配好；
+- 还需要在仓库 **Secrets** 里加一个 `CLOUDFLARE_API_TOKEN`
+  （Cloudflare 控制台 → 帐户 API 令牌 → 权限选 `Workers Scripts: Edit`
+  + `Workers KV Storage: Edit` + `Account: Read`）。
+- 没配这个 secret 时，工作流**只构建不部署**，任务依然通过，不会红叉。
+
+`wrangler login` 拿到的 OAuth token 只有几小时有效期，**不适合**当 CI 凭据，
+要用控制台签发的 API Token。
 
 ---
 

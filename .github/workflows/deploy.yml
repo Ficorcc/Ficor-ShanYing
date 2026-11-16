@@ -26,15 +26,30 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Type check
+        run: npx astro check
+
       # 混合渲染：静态页在 dist/client，Worker 入口在 dist/server
       - name: Build
         run: npm run build
         env:
           SHANYING_PLATFORM: cloudflare
 
+      # 没有长期 API Token 时只构建不部署，任务照样通过（不会红叉）
+      - name: Check deploy credentials
+        id: creds
+        run: |
+          if [ -z "${{ secrets.CLOUDFLARE_API_TOKEN }}" ]; then
+            echo "has_token=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::未配置 CLOUDFLARE_API_TOKEN，本次只构建不部署"
+          else
+            echo "has_token=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Deploy
+        if: steps.creds.outputs.has_token == 'true'
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           command: deploy

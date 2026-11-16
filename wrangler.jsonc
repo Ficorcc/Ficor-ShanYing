@@ -4,10 +4,17 @@
   "compatibility_date": "2026-11-16",
   "compatibility_flags": ["nodejs_compat"],
   // 运行期数据（留言 / 说说 / 宠物进度 / 浏览量）落在这个 KV namespace。
-  // 不写 id：交给 wrangler 自动开通，部署时会在账号下建好并复用。
+  // id 由 wrangler 首次部署时自动开通后回填（KV id 不是密钥，可以入库）。
   "kv_namespaces": [
     {
-      "binding": "SHANYING_STORE"
+      "binding": "SHANYING_STORE",
+      "id": "0a8c4a9bcd4d43baac19442b2827e914"
+    },
+    {
+      // Astro session 的存储（适配器默认要一个 KV），本站没用到 session，
+      // 但适配器会强制要求这个绑定，所以一并写死 id
+      "binding": "SESSION",
+      "id": "ead6cce60d9842be8a949a5d12a3dbce"
     }
   ],
   "observability": {
