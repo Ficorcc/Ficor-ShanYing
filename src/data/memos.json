@@ -1,0 +1,22 @@
+[
+  {
+    "id": "memo-welcome",
+    "memosName": "Ficor",
+    "content": "新站开张。这次的底座是 Astro，内容仍旧是一堆 Markdown 文件，但后台换成了 Ficor's Astro CMS。",
+    "visibility": "PUBLIC",
+    "createdAt": "2026-11-15T09:20:00.000Z",
+    "updatedAt": "2026-11-15T09:20:00.000Z",
+    "pinned": true,
+    "resources": []
+  },
+  {
+    "id": "memo-dark-mode",
+    "memosName": "Ficor",
+    "content": "深色模式做了跟随系统 + 手动覆盖两档，刷新不闪烁。",
+    "visibility": "PUBLIC",
+    "createdAt": "2026-11-14T13:05:00.000Z",
+    "updatedAt": "2026-11-14T13:05:00.000Z",
+    "pinned": false,
+    "resources": []
+  }
+]

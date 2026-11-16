@@ -1,0 +1,28 @@
+{
+  "siteTitle": "Ficor's Astro",
+  "siteDescription": "写代码，也写字",
+  "siteUrl": "https://ficor.cn",
+  "feedUrl": "https://ficor.cn/rss.xml",
+  "author": "Ficor",
+  "language": "zh-CN",
+  "subscriptions": [
+    {
+      "name": "Astro",
+      "url": "https://astro.build",
+      "feedUrl": "https://astro.build/rss.xml",
+      "avatar": "https://astro.build/favicon.svg",
+      "description": "内容驱动的现代 Web 框架。",
+      "updated": "",
+      "latestItems": []
+    },
+    {
+      "name": "柒色墨笺",
+      "url": "https://vii.ink",
+      "feedUrl": "https://vii.ink/rss.xml",
+      "avatar": "",
+      "description": "另一个同样由 CMS 管理的静态博客。",
+      "updated": "",
+      "latestItems": []
+    }
+  ]
+}
