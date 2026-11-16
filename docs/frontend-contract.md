@@ -138,9 +138,12 @@ feng-image-fade, feng-greeting, feng-visitor-stats
 - 说说：`[data-feng-talks]`（带 `data-endpoint`/`data-upload-*`/`data-page-url`）
   + `[data-talk-board]`（内容由 `feng_talk_read` 整体替换）+ 30 余个子选择器，
   详见 `src/pages/moments.astro`。
-- 友链：`[data-friend-game]`（带 `data-endpoint`/`data-nonce`）、`[data-game-wall]`
-  > `[data-game-friend]`、`[data-game-area]`/`[data-game-board]`/`[data-game-ranking]`，
-  以及 `dialog#friend-application` / `#friend-site-info` / `#friend-game-ranks`。
+- 友链：`.feng-friend-group` > `.feng-friends` > `a.feng-friend-chip`（内含
+  `img[data-friend-fallback]` + `.feng-friend-avatar-initial`），
+  以及 `dialog#friend-application` / `#friend-site-info`。
+  原主题的配对游戏区（`[data-friend-game]`、`[data-game-wall]`、`[data-emoji-game]`、
+  `[data-game-player]`、`dialog#friend-game-ranks`）已在本站移除，前端 JS 对应模块
+  均带 DOM 守卫，缺失时不会报错。
 - 订阅：`[data-feed-page]` > `[data-feed-entries]`（内容由 `feng_feed_list` 整体替换）
   + `[data-feed-status]`/`[data-feed-more]`/`[data-feed-empty]`/`[data-feed-period]`。
 

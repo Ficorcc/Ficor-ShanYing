@@ -2,8 +2,10 @@
 /**
  * 友链页。移植自 pages/friends.php。
  *
- * feng-friend-avatar 模块依赖 [data-friend-game] / [data-game-*] / 三个 dialog，
- * 缺失对应节点时游戏与申请入口会静默失效。
+ * 原主题的「博友配对 / 头像消消乐」游戏区（玩家条、类型标签、消消乐面板、
+ * 配对棋盘与头像墙）已按站点需求移除；对应的主页排行榜入口与弹窗一并移除。
+ * feng-friend-avatar 模块仍依赖 dialog#friend-application / #friend-site-info
+ * 与 img[data-friend-fallback]，缺失时申请与资料入口会静默失效。
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { icon } from '../lib/icons';
@@ -48,17 +50,6 @@ const friendCopy = Object.entries(friendInfo)
         <button
           type="button"
           class="feng-submit"
-          data-game-rank-open
-          aria-label="游戏排行榜"
-          title="游戏排行榜"
-          aria-haspopup="dialog"
-          aria-controls="friend-game-ranks"
-        >
-          <i class="fa-solid fa-gamepad" aria-hidden="true"></i>
-        </button>
-        <button
-          type="button"
-          class="feng-submit"
           data-friend-info-open
           aria-label="我的站点资料"
           title="我的站点资料"
@@ -83,98 +74,6 @@ const friendCopy = Object.entries(friendInfo)
     </header>
 
     <p class="feng-page-introduction">在独立的角落，遇见同样认真记录生活的人。</p>
-
-    <div class="feng-game-player" data-game-player></div>
-    <div class="feng-game-type-tabs" role="group" aria-label="游戏类型">
-      <button type="button" data-game-type="memory" aria-pressed="true">博友配对</button>
-      <button type="button" data-game-type="emoji" aria-pressed="false">头像消消乐</button>
-    </div>
-
-    <section class="feng-emoji-game" data-emoji-game hidden>
-      <header>
-        <h2>头像消消乐</h2>
-        <button type="button" data-emoji-restart>重新开始</button>
-      </header>
-      <p>点选两个相邻头像进行交换，横向或纵向凑齐三个即可消除。30 步内挑战 2000 分。</p>
-      <div class="feng-game-stats">
-        <span data-emoji-score>0 分</span>
-        <span data-emoji-moves>剩余 30 步</span>
-      </div>
-      <div class="feng-emoji-board" data-emoji-board role="group" aria-label="博友头像棋盘"></div>
-      <p data-emoji-status role="status" aria-live="polite"></p>
-      <section class="feng-game-ranking">
-        <h3>头像消消乐 · 积分榜</h3>
-        <p>休闲积分记录 · 分数优先，同分比较用时</p>
-        <ol data-match-ranking></ol>
-        <p data-match-rank-status role="status"></p>
-      </section>
-    </section>
-
-    <section class="feng-friend-play" data-friend-game data-endpoint="/api/ajax" data-nonce="shanying">
-      <header>
-        <div>
-          <h2>在这里，遇见朋友</h2>
-          <p>翻开头像，找到同一位朋友。</p>
-        </div>
-        <div>
-          <select data-game-size aria-label="棋盘难度">
-            <option value="16">轻松 · 16 格 / 8 对</option>
-            <option value="64">挑战 · 64 格 / 32 对</option>
-          </select>
-          <button type="button" data-game-start>玩一下</button>
-          <button type="button" data-game-exit hidden>返回头像墙</button>
-        </div>
-      </header>
-      <p class="feng-game-rules">
-        玩法：每次翻开两张牌，相同则配对成功，不同则自动盖回。找到全部配对即通关；翻牌越少排名越高，同次数按用时排序。
-      </p>
-      <div class="feng-friend-wall" data-game-wall>
-        {
-          friends.map((friend) => (
-            <a
-              data-game-friend
-              data-name={friend.name}
-              data-description={friend.description}
-              href={friend.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={friend.name}
-              title={friend.name}
-            >
-              {friend.avatar ? (
-                <img src={friend.avatar} alt="" width="112" height="112" loading="lazy" />
-              ) : (
-                <span aria-hidden="true">{friend.name.slice(0, 1)}</span>
-              )}
-            </a>
-          ))
-        }
-      </div>
-      <div class="feng-game-layout">
-        <div data-game-area hidden>
-          <div class="feng-game-stats">
-            <span data-game-time>00:00</span>
-            <span data-game-moves>翻牌 0 次</span>
-            <span data-game-score>配对 0 / 8</span>
-          </div>
-          <div class="feng-game-board" data-game-board></div>
-          <div class="feng-game-friends" data-game-friends aria-label="本局认识的博友"></div>
-          <div class="feng-game-result" data-game-result role="status" aria-live="polite">
-            点击任意卡片开始计时。
-          </div>
-        </div>
-        <section class="feng-game-ranking">
-          <h3>好友配对榜</h3>
-          <select data-game-sort aria-label="排行榜排序">
-            <option value="moves">最少翻牌</option>
-            <option value="time">最快通关</option>
-          </select>
-          <p>休闲榜单 · 使用评论昵称或登录昵称，未填写时显示“访客”；16 格与 64 格分别计榜。</p>
-          <ol data-game-ranking></ol>
-          <p data-game-rank-status role="status"></p>
-        </section>
-      </div>
-    </section>
 
     {
       Object.entries(groups).map(([group, items]) => (
@@ -223,28 +122,6 @@ const friendCopy = Object.entries(friendInfo)
       ))
     }
     {friends.length === 0 && <p class="feng-empty">这里为下一次相遇留了位置。</p>}
-
-    <dialog id="friend-game-ranks" class="feng-friend-info" aria-labelledby="friend-ranks-title">
-      <header>
-        <h2 id="friend-ranks-title">游戏排行榜</h2>
-        <button type="button" data-friend-close aria-label="关闭排行榜">
-          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-        </button>
-      </header>
-      <div class="feng-rank-controls">
-        <select data-rank-size aria-label="游戏难度">
-          <option value="16">16 格 · 8 对</option>
-          <option value="64">64 格 · 32 对</option>
-          <option value="match">头像消消乐 · 积分榜</option>
-        </select>
-        <select data-rank-order aria-label="排名方式">
-          <option value="moves">最少翻牌</option>
-          <option value="time">最快通关</option>
-        </select>
-      </div>
-      <ol data-rank-modal-list></ol>
-      <p data-rank-modal-status role="status"></p>
-    </dialog>
 
     <dialog id="friend-site-info" class="feng-friend-info" aria-labelledby="friend-site-info-title">
       <header>
