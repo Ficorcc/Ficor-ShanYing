@@ -122,12 +122,15 @@ npm run build          # 产出 dist/client（静态资源）+ dist/server（Wor
 npx wrangler deploy    # 部署到 Workers
 ```
 
-部署前需要先登录并准备好 KV：
+部署前先登录：
 
 ```bash
 npx wrangler login
-npx wrangler kv namespace create SHANYING_STORE   # 把返回的 id 填进 wrangler.jsonc
 ```
+
+KV namespace **不用手动建**：`wrangler.jsonc` 里只写绑定名、不写 `id`，
+wrangler 会在部署时自动开通（`SHANYING_STORE` 是本站的，
+`SESSION` 是 Astro session 用的，适配器自动加）。
 
 `wrangler.jsonc` 里的关键项：
 
@@ -137,13 +140,12 @@ npx wrangler kv namespace create SHANYING_STORE   # 把返回的 id 填进 wrang
 | `kv_namespaces[SHANYING_STORE]` | 运行期数据（留言 / 说说 / 宠物进度 / 浏览量）的存储 |
 | `compatibility_flags` | `nodejs_compat` |
 
-绑定 `SESSION` 由适配器自动创建（Astro session 用），部署时 Cloudflare 会自动开通。
-
 部署完成后，在 Cloudflare 控制台的 **Workers → Settings → Domains & Routes** 里
 把 `ficor.cn` 绑定到这个 Worker 即可。
 
-**KV id 说明**：`wrangler.jsonc` 里预留的是本地开发用的占位 id（`local-shanying-store`），
-线上必须换成真实 id，否则读写会失败。
+**Git 自动部署**：仓库里的 `.github/workflows/deploy.yml` 会在 push 到 `main` 时
+自动构建并部署，前提是在仓库 Settings → Secrets 里配好
+`CLOUDFLARE_API_TOKEN`（Workers 部署权限）与 `CLOUDFLARE_ACCOUNT_ID`。
 
 ---
 
