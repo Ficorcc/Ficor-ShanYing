@@ -321,6 +321,7 @@ Cloudflare 版做了两件事：
 | 社交账号默认值 | 原主题默认填的是作者西风自己的账号（gentpan），本站已全部改成本站作者；`social_x` 因无账号置空 |
 | Cloudflare Pages | Astro 7 的 `@astrojs/cloudflare` 已移除 Pages 支持，只能部署到 **Cloudflare Workers**（静态资源走 assets binding）。原 Pages 项目需要迁移，见「部署到 Cloudflare」 |
 | Cloudflare 上的运行期数据 | Workers 无文件系统，改用 KV namespace `SHANYING_STORE`；KV 每秒单 key 只能写一次，所以写入做了节流与合并 |
+| 友链页的配对游戏 | 原主题的「博友配对 / 头像消消乐」游戏区（玩家条、类型标签、头像墙、棋盘、排行榜入口）已按本站需求移除，友链页只保留友链列表与「站点资料 / 申请友链」入口。前端 JS 一行未改（缺节点时各模块自行静默退出），接口 `feng_friend_game` 也原样保留；通用主题包 `主题文件/` 里仍是完整实现 |
 
 ---
 
