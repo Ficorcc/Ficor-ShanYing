@@ -1,7 +1,7 @@
 ---
 title: "胡同尽头那盏灯"
 slug: "hutong-lamp"
-date: "2026-09-16 15:35"
+date: "2026-09-16 15:35:00"
 author: "Ficor"
 category: "感悟"
 tags:

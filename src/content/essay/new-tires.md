@@ -1,7 +1,7 @@
 ---
 title: "换轮胎"
 slug: "new-tires"
-date: "2026-07-31 07:52"
+date: "2026-07-31 07:52:00"
 author: "Ficor"
 category: "文章"
 tags:

@@ -4,7 +4,9 @@ slug: "helloworld"
 date: "2015-12-14 17:52:00"
 author: "Ficor"
 category: "文章"
-tags: []
+tags:
+  - "WordPress"
+  - "博客"
 excerpt: "作者重拾WordPress，面对熟悉的欢迎语感慨万千。曾经随手删除的文字，如今却倍感亲切，标志着一段新旅程的开始。"
 summary: "作者重拾WordPress，面对熟悉的欢迎语感慨万千。曾经随手删除的文字，如今却倍感亲切，标志着一段新旅程的开始。"
 draft: false
