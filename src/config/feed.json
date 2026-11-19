@@ -1,5 +1,5 @@
 {
-  "siteTitle": "Ficor's Astro",
+  "siteTitle": "Ficor‘s History",
   "siteDescription": "写代码，也写字",
   "siteUrl": "https://ficor.cn",
   "feedUrl": "https://ficor.cn/rss.xml",
@@ -7,22 +7,86 @@
   "language": "zh-CN",
   "subscriptions": [
     {
-      "name": "Astro",
-      "url": "https://astro.build",
-      "feedUrl": "https://astro.build/rss.xml",
-      "avatar": "https://astro.build/favicon.svg",
-      "description": "内容驱动的现代 Web 框架。",
-      "updated": "",
-      "latestItems": []
-    },
-    {
       "name": "柒色墨笺",
       "url": "https://vii.ink",
       "feedUrl": "https://vii.ink/rss.xml",
       "avatar": "",
       "description": "另一个同样由 CMS 管理的静态博客。",
-      "updated": "",
-      "latestItems": []
+      "updated": "2026-09-16T00:00:00.000Z",
+      "latestItems": [
+        {
+          "title": "胡同尽头那盏灯",
+          "url": "https://vii.ink/%E8%83%A1%E5%90%8C%E5%B0%BD%E5%A4%B4%E9%82%A3%E7%9B%8F%E7%81%AF/",
+          "date": "2026-09-16T00:00:00.000Z",
+          "summary": ""
+        },
+        {
+          "title": "教师节",
+          "url": "https://vii.ink/%E6%95%99%E5%B8%88%E8%8A%82/",
+          "date": "2026-09-13T00:00:00.000Z",
+          "summary": ""
+        },
+        {
+          "title": "岚山下海半日游",
+          "url": "https://vii.ink/%E5%B2%9A%E5%B1%B1%E4%B8%8B%E6%B5%B7%E5%8D%8A%E6%97%A5%E6%B8%B8/",
+          "date": "2026-09-09T00:00:00.000Z",
+          "summary": ""
+        },
+        {
+          "title": "暑假旅行｜中部自驾05 - 河北石家庄",
+          "url": "https://vii.ink/%E6%9A%91%E5%81%87%E6%97%85%E8%A1%8C-%E4%B8%AD%E9%83%A8%E8%87%AA%E9%A9%BE05-%E6%B2%B3%E5%8C%97%E7%9F%B3%E5%AE%B6%E5%BA%84/",
+          "date": "2026-09-03T00:00:00.000Z",
+          "summary": ""
+        },
+        {
+          "title": "暑假旅行｜中部自驾04 - 山西大同",
+          "url": "https://vii.ink/%E6%9A%91%E5%81%87%E6%97%85%E8%A1%8C-%E4%B8%AD%E9%83%A8%E8%87%AA%E9%A9%BE04-%E5%B1%B1%E8%A5%BF%E5%A4%A7%E5%90%8C/",
+          "date": "2026-08-31T00:00:00.000Z",
+          "summary": ""
+        },
+        {
+          "title": "暑假旅行｜中部自驾03 - 内蒙古达拉特旗",
+          "url": "https://vii.ink/%E6%9A%91%E5%81%87%E6%97%85%E8%A1%8C-%E4%B8%AD%E9%83%A8%E8%87%AA%E9%A9%BE03-%E5%86%85%E8%92%99%E5%8F%A4%E8%BE%BE%E6%8B%89%E7%89%B9%E6%97%97/",
+          "date": "2026-08-26T00:00:00.000Z",
+          "summary": ""
+        },
+        {
+          "title": "暑假旅行｜中部自驾02 - 内蒙古鄂尔多斯",
+          "url": "https://vii.ink/%E6%9A%91%E5%81%87%E6%97%85%E8%A1%8C-%E4%B8%AD%E9%83%A8%E8%87%AA%E9%A9%BE02-%E5%86%85%E8%92%99%E5%8F%A4%E9%84%82%E5%B0%94%E5%A4%9A%E6%96%AF/",
+          "date": "2026-08-25T00:00:00.000Z",
+          "summary": ""
+        },
+        {
+          "title": "暑假旅行｜中部自驾01 - 山西临汾",
+          "url": "https://vii.ink/%E6%9A%91%E5%81%87%E6%97%85%E8%A1%8C-%E4%B8%AD%E9%83%A8%E8%87%AA%E9%A9%BE01-%E5%B1%B1%E8%A5%BF%E4%B8%B4%E6%B1%BE/",
+          "date": "2026-08-23T00:00:00.000Z",
+          "summary": ""
+        },
+        {
+          "title": "立秋小记",
+          "url": "https://vii.ink/%E7%AB%8B%E7%A7%8B%E5%B0%8F%E8%AE%B0/",
+          "date": "2026-08-22T00:00:00.000Z",
+          "summary": ""
+        },
+        {
+          "title": "六月六日夏",
+          "url": "https://vii.ink/%E5%85%AD%E6%9C%88%E5%85%AD%E6%97%A5%E5%A4%8F/",
+          "date": "2026-08-07T00:00:00.000Z",
+          "summary": ""
+        },
+        {
+          "title": "悲催的一天，温暖的人",
+          "url": "https://vii.ink/%E6%82%B2%E5%82%AC%E7%9A%84%E4%B8%80%E5%A4%A9-%E6%B8%A9%E6%9A%96%E7%9A%84%E4%BA%BA/",
+          "date": "2026-08-07T00:00:00.000Z",
+          "summary": ""
+        },
+        {
+          "title": "“星”派大电影",
+          "url": "https://vii.ink/%E6%98%9F-%E6%B4%BE%E5%A4%A7%E7%94%B5%E5%BD%B1/",
+          "date": "2026-08-07T00:00:00.000Z",
+          "summary": ""
+        }
+      ]
     }
   ]
 }

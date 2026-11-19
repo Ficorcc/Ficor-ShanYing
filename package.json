@@ -14,6 +14,7 @@
     "preview:node": "SHANYING_PLATFORM=node astro preview",
     "deploy": "wrangler deploy",
     "check": "astro check",
+    "refresh:feeds": "node scripts/refresh-feeds.mjs",
     "astro": "astro"
   },
   "dependencies": {

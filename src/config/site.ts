@@ -3,7 +3,7 @@
  * 注意：url 同时被 astro.config.mjs 读取，改完记得重启 dev server。
  */
 export const SITE = {
-  title: "Ficor's Astro",
+  title: "Ficor‘s History",
   subtitle: '写代码，也写字',
   description:
     '一个由 Astro 驱动的静态博客：技术折腾、随笔写作、友链订阅与说说动态，全部内容由本地 CMS 后台管理。',

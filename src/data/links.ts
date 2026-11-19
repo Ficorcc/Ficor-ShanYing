@@ -20,7 +20,7 @@ export interface SiteInfo {
 }
 
 export const siteInfo: SiteInfo = {
-  title: 'Ficor\'s Astro',
+  title: 'Ficor‘s History',
   url: 'https://ficor.cn',
   description: '写代码，也写字',
   avatar: '',
@@ -36,16 +36,6 @@ export const siteInfo: SiteInfo = {
  * 手动新增时，id 建议使用稳定字符串，避免后台重新生成。
  */
 export const links: LinkItem[] = [
-  {
-    id: 'astro',
-    name: 'Astro',
-    url: 'https://astro.build',
-    description: '内容驱动的现代 Web 框架，本站的地基。',
-    avatar: 'https://astro.build/favicon.svg',
-    feed: 'https://astro.build/rss.xml',
-    is_active: true,
-    status: 'online',
-  },
   {
     id: 'ficor-net',
     name: '柒色墨笺',
